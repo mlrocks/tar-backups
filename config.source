@@ -1,0 +1,42 @@
+# source file with config variables
+#
+# @author Martin Loehle (martin@loehle.rocks)
+#
+
+#
+# hetzner storage box
+#
+SB_USER='u123456-sub1'
+
+#
+# destination of backup file
+#
+# local folder where backup is stored temporarily
+#
+DESTINATION_DIR="/home/user/backups/data"
+
+#
+# files/folders for backup
+#
+# seperate multiple files/folders with spaces
+#
+SOURCE_DIRS='/home/user/folder1 /home/user/folder2'
+
+
+#
+# database
+#
+# db-types options are
+#   1) "": no database
+#   2) "mysql": mysql
+#   3) "postgres": postgres
+#
+#      to automate backups with postgres without asking for a
+#      password, create a .pgpass file in your home directory.
+#      for detailed info see:
+#      https://www.postgresql.org/docs/current/static/libpq-pgpass.html
+#
+DB_TYPE="mysql"
+DB_USER="db-user"
+DB_PASSWORD="secret"
+DB_NAME="db-name"
