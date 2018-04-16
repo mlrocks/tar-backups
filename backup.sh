@@ -8,6 +8,7 @@
 #
 START_DATE=`date +%c`
 echo "starting backup: ${START_DATE}"
+BASEDIR=$(dirname "$0")
 
 
 #
@@ -27,11 +28,11 @@ function echo_red() {
 # source in the config file
 #
 CONF_SOURCE="config.source"
-if [ -e ${CONF_SOURCE} ]; then
-  . $CONF_SOURCE
+if [ -e $BASEDIR/${CONF_SOURCE} ]; then
+  . $BASEDIR/$CONF_SOURCE
 else
-  echo_red "file ${CONF_SOURCE} not found!"
-  echo_red "add the file ${CONF_SOURCE} and set your variables."
+  echo_red "file $BASEDIR/${CONF_SOURCE} not found!"
+  echo_red "add the file $BASEDIR/${CONF_SOURCE} and set your variables."
   echo_red "exiting..."
   exit 1
 fi
