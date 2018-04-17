@@ -12,28 +12,15 @@ BASEDIR=$(dirname "$0")
 
 
 #
-# nicer echo output
-#
-function echo_green() {
-        local text=$1
-        echo -e "\033[40;1;32m$text\033[0m"
-}
-
-function echo_red() {
-        local text=$1
-        echo -e "\033[40;1;31m$text\033[0m"
-}
-
-#
 # source in the config file
 #
 CONF_SOURCE="config.source"
 if [ -e $BASEDIR/${CONF_SOURCE} ]; then
   . $BASEDIR/$CONF_SOURCE
 else
-  echo_red "file $BASEDIR/${CONF_SOURCE} not found!"
-  echo_red "add the file $BASEDIR/${CONF_SOURCE} and set your variables."
-  echo_red "exiting..."
+  echo "file $BASEDIR/${CONF_SOURCE} not found!"
+  echo "add the file $BASEDIR/${CONF_SOURCE} and set your variables."
+  echo "exiting..."
   exit 1
 fi
 
@@ -61,9 +48,9 @@ if [ "${DB_TYPE}" == "mysql" ]; then
               > ${DB_DUMP_FILE}                             \
               2>/dev/null
     if [ "$?" -eq 0 ]; then
-        echo_green "OK"
+        echo "OK"
     else
-        echo_red "FAILED"
+        echo "FAILED"
     fi
 
 elif [ "${DB_TYPE}" == "postgres" ]; then
@@ -77,9 +64,9 @@ elif [ "${DB_TYPE}" == "postgres" ]; then
             2>/dev/null
 
     if [ "$?" -eq 0 ]; then
-        echo_green "OK"
+        echo "OK"
     else
-        echo_red "FAILED"
+        echo "FAILED"
     fi
 
 else
@@ -102,9 +89,9 @@ tar -cpzPf ${TAR_FILE}                                      \
     ${SOURCE}
 
 if [ "$?" -eq 0 ]; then
-    echo_green "OK"
+    echo "OK"
 else
-    echo_red "FAILED"
+    echo "FAILED"
 fi
 
 
@@ -115,9 +102,9 @@ echo -n "upload to storage box... "
 scp ${TAR_FILE} ${SB_USER}@${SB_USER}.your-storagebox.de:daily_${TAR_FILENAME}
 
 if [ "$?" -eq 0 ]; then
-    echo_green "OK"
+    echo "OK"
 else
-    echo_red "FAILED"
+    echo "FAILED"
 fi
 
 
@@ -129,9 +116,9 @@ if [ "${DB_TYPE}" == "mysql" ] || [ "${DB_TYPE}" == "postgres" ]; then
     rm $DB_DUMP_FILE
 
     if [ "$?" -eq 0 ]; then
-        echo_green "OK"
+        echo "OK"
     else
-        echo_red "FAILED"
+        echo "FAILED"
     fi
 fi
 
@@ -139,9 +126,9 @@ echo -n "remove tar file... "
 rm $TAR_FILE
 
 if [ "$?" -eq 0 ]; then
-    echo_green "OK"
+    echo "OK"
 else
-    echo_red "FAILED"
+    echo "FAILED"
 fi
 
 
